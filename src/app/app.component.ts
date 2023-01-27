@@ -7,10 +7,20 @@ import { Persona } from './personna.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'listadoPersonas';
+  titulo = 'Listado de Personas';
   personas: Persona[] = [
   new Persona('Diego','Leguizamon'), 
   new Persona('Laura','Juarez'),
   new Persona('Karla','algo')];
+  nombreInput: string = '';
+  apellidoInput: string = '';
+  idBorrar:number=0;
 
+  agregarPersona(){
+    let persona1 = new Persona(this.nombreInput,this.apellidoInput);
+    this.personas.push(persona1);
+  }
+  borrarPersona(){
+    this.personas.splice(this.idBorrar-1,1);
+  }
 }

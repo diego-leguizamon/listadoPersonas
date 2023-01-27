@@ -9,6 +9,7 @@ import { Persona } from '../personna.model';
 export class FormularioComponent {
   
   @Output() personaCreada = new EventEmitter<Persona>();
+  @Output() personaBorrada = new EventEmitter<number>();
   nombreInput: string = '';
   apellidoInput: string = '';
   idBorrar:number=0;
@@ -20,5 +21,8 @@ export class FormularioComponent {
   }
   borrarPersona(){
     //this.personas.splice(this.idBorrar-1,1);
+    let indice: number=this.idBorrar;
+    this.personaBorrada.emit(indice);
+
   }
 }

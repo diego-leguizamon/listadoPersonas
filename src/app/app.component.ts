@@ -16,4 +16,9 @@ export class AppComponent {
   personaAgregada(persona: Persona){
     this.personas.push(persona);
   }
+
+  personaBorrada(idBorrar: number){
+    this.personas.splice(idBorrar-1,1);
+  }
 }
+

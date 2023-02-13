@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Persona } from './personna.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,19 @@ export class AppComponent {
   new Persona('Laura','Juarez'),
   new Persona('Karla','algo')];
   
-  personaAgregada(persona: Persona){
+  personaAgregada(persona: Persona){   
     this.personas.push(persona);
   }
 
   personaBorrada(idBorrar: number){
-    this.personas.splice(idBorrar-1,1);
+    let total: number=0;
+    total = this.personas.length;
+    if(idBorrar > total || idBorrar==0){
+      //alert('Error no existe el indice ');
+      Swal.fire('Error no existe el indice que desea borrar');
+    }else{
+      this.personas.splice(idBorrar-1,1);
+    }
   }
 }
 

@@ -19,21 +19,23 @@
         </div>
       </form>
 -->
-<form class="item">
-  <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="nombreInput">
+<div class="box">
+  <form class="item" #f="ngForm" (ngSubmit)="f.form.valid && onGuardarPersona()">
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="nombreInput" required="">
 
-  <input type="text" name="apellido" id="apellido" placeholder="apellido" [(ngModel)]="apellidoInput">
+    <input type="text" name="apellido" id="apellido" placeholder="apellido" [(ngModel)]="apellidoInput" required="">
 
-  <button type="submit" (click)="agregarPersona()">+</button>
-</form>
-
-<form class="item">
-  <input type="text" name="borrar" id="borrar" placeholder="idBorrar" [(ngModel)]="idBorrar" />
-
-  <button type="submit" (click)="borrarPersona()">-</button>
-</form>
-
+    <button type="submit" style="cursor: pointer">+</button>
+    <button *ngIf="idEdicion != null" type="submit" style="cursor: pinter;" class="buttonRed" (click)="borrarPersona()">-</button>
+  </form>
 <!--
+  <form class="item">
+    <input type="text" name="borrar" id="borrar" placeholder="idBorrar" [(ngModel)]="idBorrar" />
+
+    <button type="submit" (click)="borrarPersona()">-</button>
+  </form>
+</div>
+
   <div class="row">
     <div class="col">
       <form action="">

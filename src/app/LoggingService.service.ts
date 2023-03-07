@@ -35,16 +35,28 @@ export class LoggingService{
     personaAgregada(persona: Persona){   
         this.personas.push(persona);
       }
-    
-      personaBorrada(idBorrar: number){
-        let total: number=0;
-        total = this.personas.length;
-        if(idBorrar > total || idBorrar<=0){
-          //alert('Error no existe el indice ');
-          Swal.fire('Error no existe el indice que desea borrar');
+    /*
+    personaBorrada(idBorrar: number){
+      let total: number=1;
+      total = this.personas.length;
+      if(idBorrar > total || idBorrar<=0){
+         //alert('Error no existe el indice ');
+        Swal.fire('Error no existe el indice que desea borrar');
         }else{
-          this.personas.splice(idBorrar-1,1);
+          this.personas.splice(idBorrar,1);
         }
-      }
+    }*/
+    personaBorrada(idBorrar: number){
+       this.personas.splice(idBorrar,1); 
+    }
     
+    encontrarPersona(id:number){
+        let persona: Persona= this.personas[id];
+        return persona;
+    }
+    modificarPersona(id: number, persona : Persona){
+        let persona1 = this.personas[id];
+        persona1.nombre = persona.nombre;
+        persona1.apellido = persona.apellido;
+    }
 }

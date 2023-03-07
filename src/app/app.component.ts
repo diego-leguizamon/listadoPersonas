@@ -8,15 +8,9 @@ import { LoggingService } from './LoggingService.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   titulo = 'Listado de Personas';
-  personas: Persona[] = [];
-  ngOnInit(): void{
-    this.personas = this.loggingService.personas;
-  }
   
-
-  constructor(private loggingService: LoggingService){}
   //como usamos servicios para agregar las personas, no escuchamos mas los eventos y desde
   //formulario.ts se va a encargar de agregar todo
   //no necesitamos los procedimientos siguientes

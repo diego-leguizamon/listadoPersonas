@@ -11,13 +11,23 @@ import { Persona } from '../personna.model';
 export class PersonasComponent {
   
   personas: Persona[] = [];
+  constructor(private loggingService: LoggingService, private router: Router){}
+
   ngOnInit(): void{
-    this.personas = this.loggingService.personas;
+    //this.personas = this.loggingService.personas;
+    this.loggingService.obtenerPersonas()
+    .subscribe(
+     (personas: any) =>{
+        this.personas = personas;
+        this.loggingService.setPersonas(personas);
+       }
+    );
+
   }
-    constructor(private loggingService: LoggingService, private router: Router){}
 
   agregar(){
      this.router.navigate(['personas/agregar'])
   }
 
 }
+

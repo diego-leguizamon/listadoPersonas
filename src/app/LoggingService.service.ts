@@ -1,15 +1,28 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import Swal from "sweetalert2";
+import { DataServices } from "./data.services";
 import { Persona } from "./personna.model";
 
+@Injectable()
 export class LoggingService{
-    
+    constructor( private dataservice: DataServices){}
+    /*
     personas: Persona[] = [
         new Persona('Diego','Leguizamon'), 
         new Persona('Laura','Juarez'),
         new Persona('Karla','algo')];
+    */
+    personas: Persona[] = [];
 
     saludar = new EventEmitter<number>;
+    setPersonas(personas: Persona[]){
+        this.personas = personas;
+    }
+
+    obtenerPersonas(){
+        return this.dataservice.cargarPersonas();
+        }
+
     /*
         este servicio se puede usar en todos los componentes de la aplicacion
         debe estar creado en la parte de compononte/provider:
@@ -33,7 +46,11 @@ export class LoggingService{
     }
     
     personaAgregada(persona: Persona){   
+        if(this.personas == null){
+            this.personas=[];
+        }
         this.personas.push(persona);
+        this.dataservice.guardarPersonas(this.personas);
       }
     /*
     personaBorrada(idBorrar: number){
@@ -48,6 +65,11 @@ export class LoggingService{
     }*/
     personaBorrada(idBorrar: number){
        this.personas.splice(idBorrar,1); 
+       this.dataservice.borrarPersona(idBorrar);
+       //al no tener indice fisico y usar el que proporciona la base, cuando eleminiamos la persona
+       //necesitamos regenerar la base para que no queden huecos entre indices
+       this.cargarTodo();
+       
     }
     
     encontrarPersona(id:number){
@@ -58,5 +80,11 @@ export class LoggingService{
         let persona1 = this.personas[id];
         persona1.nombre = persona.nombre;
         persona1.apellido = persona.apellido;
+        this.dataservice.modificarPersona(id, persona);
+    }
+    cargarTodo(){
+        if(this.personas != null){
+            this.dataservice.guardarPersonas(this.personas);
+        }
     }
 }

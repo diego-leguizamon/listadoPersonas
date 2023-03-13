@@ -14,7 +14,7 @@ html {
   }
   
   .box {
-    max-width: 400px;
+    max-width: 450px;
     margin: 50px auto;
     background: white;
     border-radius: 5px;
@@ -40,6 +40,9 @@ html {
   
   input[type="checkbox"] {
     margin: 20px;
+  }
+  .centrado{
+    text-align: center;
   }
   
   p {
@@ -99,3 +102,18 @@ html {
     opacity: 1;
   }
   
+  .loginbutton {
+    min-height: 50px;
+    width: fit-content;
+    border-radius: 25%;
+    border-color: transparent;
+    background-color: #3F51B5;
+    color: #fff;
+    font-size: 25px;
+    padding-bottom: 6px;
+    border-width: 0;
+  }
+
+  .inputLogin{
+    padding: 0 10px;
+  }

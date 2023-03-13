@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { Persona } from './personna.model';
-import Swal from 'sweetalert2';
-import { LoggingService } from './LoggingService.service';
+import firebase from "firebase/compat/app";
+import { LoginService } from './login/login.service';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   titulo = 'Listado de Personas';
+
+  constructor(private loginservice: LoginService){}
+
+  ngOnInit(): void{
+    firebase.initializeApp({
+      apiKey: "AIzaSyDNQ6lQByvmE8NEgW64zbAB_CdJdsYOn74",
+      authDomain: "listado-personas-be4e4.firebaseapp.com",
+    });
+  }
+  isAutenticado(){
+    return this.loginservice.isAutenticado();
+  }
+  salir(){
+    this.loginservice.logout();
+  }
   
   //como usamos servicios para agregar las personas, no escuchamos mas los eventos y desde
   //formulario.ts se va a encargar de agregar todo
